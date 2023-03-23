@@ -100,7 +100,7 @@ if option ==  True:
 
 else:
 
-    perfil_df = perfil_df.drop_duplicates()
+    perfil_df = perfil_df
 
 
 
