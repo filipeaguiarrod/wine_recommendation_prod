@@ -115,8 +115,8 @@ st.title('Recomendação')
 top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
 
 recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos, 
-                                        matrix_wines=model,
-                                        perfil=perfil_df, top=top)
+                                        matrix_wines=model.dropna(),
+                                        perfil=perfil_df.dropna(), top=top)
 
 #recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
 #recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
