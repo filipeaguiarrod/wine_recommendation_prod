@@ -36,11 +36,11 @@ def make_recommendation(dataset, matrix_wines,perfil, top=4):
     matrix_wines_wv = matrix_wines.loc[~(matrix_wines.index.isin(preferidos))]
     matrix_wines_wv = matrix_wines_wv.loc[~(matrix_wines_wv.index.isin(ruim))] 
 
-    similarity_good = cosine_similarity(matrix_wines_wv,good)
+    similarity_good = cosine_similarity(matrix_wines_wv,good.dropna())
 
     recommended = pd.DataFrame(similarity_good, index=matrix_wines_wv.index, columns=['cos_score_good'])
 
-    similarity_bad = cosine_similarity(matrix_wines_wv,bad)
+    similarity_bad = cosine_similarity(matrix_wines_wv,bad.dropna()'')
 
     recommended['cos_score_bad'] = similarity_bad 
 
