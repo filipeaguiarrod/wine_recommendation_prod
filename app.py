@@ -112,7 +112,7 @@ try:
 
     recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos, 
                                             matrix_wines=model,
-                                            perfil=perfil_df, top=top);
+                                            perfil=perfil_df, top=top)
     
     recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
     recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
