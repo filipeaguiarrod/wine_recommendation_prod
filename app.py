@@ -98,6 +98,12 @@ if option ==  True:
 
         pass
 
+else:
+
+    perfil_df = perfil_df.drop_duplicates()
+
+
+
 st.dataframe(perfil_df)
 
 st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_bytes(perfil_df),file_name='perfil.xlsx')
