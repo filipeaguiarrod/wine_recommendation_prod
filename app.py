@@ -64,8 +64,6 @@ if option == True:
         st.write(upl_perfil)
         st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
     o download já terá seu perfil atualizado !''')
-        
-        st.dataframe(upl_perfil)
 
     except:
         pass
@@ -115,8 +113,8 @@ try:
                                             matrix_wines=model,
                                             perfil=perfil_df, top=top)
     
-    recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
-    recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
+    #recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
+    #recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
     
     st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
     st.markdown('Você poderá arrastar a tabela e ver algumas características sobre ele.')
