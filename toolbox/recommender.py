@@ -22,34 +22,52 @@ def make_recommendation(dataset, matrix_wines,perfil, top=4):
     
     preferidos = perfil.loc[perfil['evaluation']==1,'name'].to_list()
     vector_preferido = matrix_wines.loc[matrix_wines.index.isin(preferidos)]
-    
+    good = pd.DataFrame(vector_preferido.mean(axis=0)).T
     
     ruim = perfil.loc[perfil['evaluation']==-1,'name'].to_list()
-    vector_ruim = matrix_wines.loc[matrix_wines.index.isin(ruim)]
 
-    good = pd.DataFrame(vector_preferido.mean(axis=0)).T
-    bad = pd.DataFrame(vector_ruim.mean(axis=0)).T
+    if len(ruim)>0:
+   
+        vector_ruim = matrix_wines.loc[matrix_wines.index.isin(ruim)]
+        bad = pd.DataFrame(vector_ruim.mean(axis=0)).T
+        
+        #Matrix of wines without choosed elements from users.
 
-    #Matrix of wines without choosed elements from users.
+        #matrix_wines_wv = matrix_wines
+        matrix_wines_wv = matrix_wines.loc[~(matrix_wines.index.isin(preferidos))]
+        matrix_wines_wv = matrix_wines_wv.loc[~(matrix_wines_wv.index.isin(ruim))] 
 
-    #matrix_wines_wv = matrix_wines
-    matrix_wines_wv = matrix_wines.loc[~(matrix_wines.index.isin(preferidos))]
-    matrix_wines_wv = matrix_wines_wv.loc[~(matrix_wines_wv.index.isin(ruim))] 
+        similarity_good = cosine_similarity(matrix_wines_wv,good)
 
-    similarity_good = cosine_similarity(matrix_wines_wv,good.dropna())
+        recommended = pd.DataFrame(similarity_good, index=matrix_wines_wv.index, columns=['matching_vinhos_bons'])
 
-    recommended = pd.DataFrame(similarity_good, index=matrix_wines_wv.index, columns=['cos_score_good'])
+        similarity_bad = cosine_similarity(matrix_wines_wv,bad)
 
-    similarity_bad = cosine_similarity(matrix_wines_wv,bad.dropna())
+        recommended['matching_vinhos_ruins'] = similarity_bad 
 
-    recommended['cos_score_bad'] = similarity_bad 
+        recommended.sort_values(by='matching_vinhos_bons',ascending=False,inplace=True)
 
-    recommended.sort_values(by='cos_score_good',ascending=False,inplace=True)
+        # Just a "sanity check", if cos_score_bad > matching_vinhos_bons exclude 
 
-    # Just a "sanity check", if cos_score_bad > cos_score_good exclude 
+        recommended = recommended.loc[recommended['matching_vinhos_bons']>recommended['matching_vinhos_ruins']]
 
-    recommended = recommended.loc[recommended['cos_score_good']>recommended['cos_score_bad']]
+        top_recommended = recommended.head(top)
 
-    top_recommended = recommended.head(top)
+        return dataset.loc[dataset.index.isin(top_recommended.index.to_list())], pd.concat([top_recommended,dataset.loc[dataset.index.isin(top_recommended.index.to_list())]],axis=1)
 
-    return dataset.loc[dataset.index.isin(top_recommended.index.to_list())], pd.concat([top_recommended,dataset.loc[dataset.index.isin(top_recommended.index.to_list())]],axis=1)
+    else:
+
+        matrix_wines_wv = matrix_wines.loc[~(matrix_wines.index.isin(preferidos))]
+
+        similarity_good = cosine_similarity(matrix_wines_wv,good)
+
+        recommended = pd.DataFrame(similarity_good, index=matrix_wines_wv.index, columns=['matching_vinhos_bons'])
+
+        recommended.sort_values(by='matching_vinhos_bons',ascending=False,inplace=True)
+
+        top_recommended = recommended.head(top)
+
+        return dataset.loc[dataset.index.isin(top_recommended.index.to_list())], pd.concat([top_recommended,dataset.loc[dataset.index.isin(top_recommended.index.to_list())]],axis=1)
+
+
+    

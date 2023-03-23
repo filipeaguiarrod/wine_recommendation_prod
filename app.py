@@ -103,7 +103,6 @@ else:
     perfil_df = perfil_df
 
 
-
 st.dataframe(perfil_df)
 
 st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_bytes(perfil_df),file_name='perfil.xlsx')
@@ -114,23 +113,17 @@ st.title('Recomendação')
 
 top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
 
-recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos, 
+recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos.dropna(), 
                                         matrix_wines=model.dropna(),
                                         perfil=perfil_df.dropna(), top=top)
 
-#recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
-#recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
 
 st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
-st.markdown('Você poderá arrastar a tabela e ver algumas características sobre ele.')
 
-option2 = st.checkbox("Se quiser ver % matching para cada vinho selecione aqui!");
-st.info('O score vai de 0 a 100% e diz o quão próximo são as carcaterísticas dos vinhos recomendados com os que você experimentou e gostou.')
+option2 = st.checkbox("Se quiser ver os scores para cada vinho selecione aqui!")
 
 if option2:
-
     st.dataframe(recommendations_wscores)
 
 else:
-
     st.dataframe(recommendations)
