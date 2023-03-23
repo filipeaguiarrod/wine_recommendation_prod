@@ -67,9 +67,7 @@ if option == True:
         st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
 o download já terá seu perfil atualizado !''')
 
-    except:
-        pass
-
+ 
 perfil = {'name':[],'evaluation':[]}
 
 good = st.multiselect(f':smiley: - Selecione alguns vinhos que você **GOSTOU** ', vinhos.index)
