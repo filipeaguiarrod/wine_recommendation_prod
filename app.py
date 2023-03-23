@@ -111,33 +111,32 @@ st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_byte
     
 st.title('Recomendação')
 
-try:
 
-    top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
+top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
 
-    recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos, 
-                                            matrix_wines=model,
-                                            perfil=perfil_df, top=top)
-    
-    #recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
-    #recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
-    
-    st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
-    st.markdown('Você poderá arrastar a tabela e ver algumas características sobre ele.')
+recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos, 
+                                        matrix_wines=model,
+                                        perfil=perfil_df, top=top)
 
-    option2 = st.checkbox("Se quiser ver % matching para cada vinho selecione aqui!");
-    st.info('O score vai de 0 a 100% e diz o quão próximo são as carcaterísticas dos vinhos recomendados com os que você experimentou e gostou.')
+#recommendations_wscores.rename(columns={'cos_score_good':'matching_vinhos_bons','cos_score_bad':'matching_vinhos_ruins'},inplace=True)
+#recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']] = recommendations_wscores[['matching_vinhos_bons','matching_vinhos_ruins']].round(3)*100
 
-    if option2:
+st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
+st.markdown('Você poderá arrastar a tabela e ver algumas características sobre ele.')
 
-        st.dataframe(recommendations_wscores)
+option2 = st.checkbox("Se quiser ver % matching para cada vinho selecione aqui!");
+st.info('O score vai de 0 a 100% e diz o quão próximo são as carcaterísticas dos vinhos recomendados com os que você experimentou e gostou.')
 
-    else:
+if option2:
 
-        st.dataframe(recommendations)
+    st.dataframe(recommendations_wscores)
 
-except:
+else:
+
+    st.dataframe(recommendations)
+
+'''except:
 
     st.info(' Monte seu perfil antes de receber qualquer recomendação !')
-
-
+''
+'
