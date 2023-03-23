@@ -87,13 +87,18 @@ for wine in bad:
 
 perfil_df = pd.DataFrame(perfil)
 
-st.dataframe(perfil_df)
-
 if option ==  True:
 
-    perfil_df = pd.concat([upl_perfil,perfil_df])
-    perfil_df = perfil_df.drop_duplicates()
+    try:
 
+        perfil_df = pd.concat([upl_perfil,perfil_df])
+        perfil_df = perfil_df.drop_duplicates()
+
+    except:
+
+        pass
+
+st.dataframe(perfil_df)
 
 st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_bytes(perfil_df),file_name='perfil.xlsx')
 
