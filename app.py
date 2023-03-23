@@ -9,11 +9,6 @@ st.set_page_config(
     page_icon="🧊",
     layout="centered",
     initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
 )
 
 st.title('Alfred wine advisor :wine_glass:')
@@ -93,12 +88,13 @@ for wine in bad:
 
 perfil_df = pd.DataFrame(perfil)
 
+st.dataframe(perfil_df)
+
 if option ==  True:
+
     try:
         perfil_df = pd.concat([upl_perfil,perfil_df])
         perfil_df = perfil_df.drop_duplicates()
-    except:
-        pass
 
 
 st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_bytes(perfil_df),file_name='perfil.xlsx')
