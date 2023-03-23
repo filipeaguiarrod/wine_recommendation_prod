@@ -110,20 +110,24 @@ st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_byte
     
 st.title('Recomendação')
 
+try:
+    top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
 
-top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
-
-recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos.dropna(), 
-                                        matrix_wines=model.dropna(),
-                                        perfil=perfil_df.dropna(), top=top)
+    recommendations, recommendations_wscores = rc.make_recommendation(dataset=vinhos.dropna(), 
+                                            matrix_wines=model.dropna(),
+                                            perfil=perfil_df.dropna(), top=top)
 
 
-st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
+    st.markdown('**Estes são alguns dos vinhos que você pode gostar** :wine_glass: !')
 
-option2 = st.checkbox("Se quiser ver os scores para cada vinho selecione aqui!")
+    option2 = st.checkbox("Se quiser ver os scores para cada vinho selecione aqui!")
 
-if option2:
-    st.dataframe(recommendations_wscores)
+    if option2:
+        st.dataframe(recommendations_wscores)
 
-else:
-    st.dataframe(recommendations)
+    else:
+        st.dataframe(recommendations)
+
+except:
+
+    st.info('Você precisa escolher pelo menos 1 vinho que já tenha gostado !')
