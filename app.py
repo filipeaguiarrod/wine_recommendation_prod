@@ -57,15 +57,18 @@ option = st.checkbox("*Já criou seu perfil no passado ? Selecione aqui e faça 
 
 if option == True:
 
-  
-    uploaded_file = st.file_uploader("Jogue aqui seu .xlsx contendo seu perfil")
-    upl_perfil = pd.read_excel(uploaded_file)
-    st.write(upl_perfil)
-    st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
-o download já terá seu perfil atualizado !''')
-    
-    st.dataframe(upl_perfil)
 
+    try:
+        uploaded_file = st.file_uploader("Jogue aqui seu .xlsx contendo seu perfil")
+        upl_perfil = pd.read_excel(uploaded_file)
+        st.write(upl_perfil)
+        st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
+    o download já terá seu perfil atualizado !''')
+        
+        st.dataframe(upl_perfil)
+
+    except:
+        pass
 
  
 perfil = {'name':[],'evaluation':[]}
