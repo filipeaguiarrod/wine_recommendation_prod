@@ -134,9 +134,3 @@ if option2:
 else:
 
     st.dataframe(recommendations)
-
-'''except:
-
-    st.info(' Monte seu perfil antes de receber qualquer recomendação !')
-''
-'
