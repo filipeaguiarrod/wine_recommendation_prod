@@ -40,7 +40,7 @@ def make_recommendation(dataset, matrix_wines,perfil, top=4):
 
     recommended = pd.DataFrame(similarity_good, index=matrix_wines_wv.index, columns=['cos_score_good'])
 
-    similarity_bad = cosine_similarity(matrix_wines_wv,bad.dropna()'')
+    similarity_bad = cosine_similarity(matrix_wines_wv,bad.dropna())
 
     recommended['cos_score_bad'] = similarity_bad 
 
