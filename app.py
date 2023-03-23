@@ -63,6 +63,8 @@ if option == True:
     st.write(upl_perfil)
     st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
 o download já terá seu perfil atualizado !''')
+    
+    st.dataframe(upl_perfil)
 
 
  
