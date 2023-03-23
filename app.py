@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-from toolbox import front_utils as fu
-from toolbox import recommender as rc
+from toolbox import front_utils as fu, recommender as rc
 
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
-    page_icon="🧊",
+    page_title="Alfred Wine Advisor",
+    page_icon=":wine_glass:",
     layout="centered",
     initial_sidebar_state="expanded",
 )
@@ -47,8 +46,6 @@ model.set_index('vinho', inplace=True)
 
 #st.dataframe(data=vinhos)
 
-
-
 # Perfil section, from here are constructed the customer perfil, used in recommendation.
 
 st.title('Perfil')
@@ -60,12 +57,13 @@ option = st.checkbox("*Já criou seu perfil no passado ? Selecione aqui e faça 
 
 if option == True:
 
-    try:
-        uploaded_file = st.file_uploader("Jogue aqui seu .xlsx contendo seu perfil")
-        upl_perfil = pd.read_excel(uploaded_file)
-        st.write(upl_perfil)
-        st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
+  
+    uploaded_file = st.file_uploader("Jogue aqui seu .xlsx contendo seu perfil")
+    upl_perfil = pd.read_excel(uploaded_file)
+    st.write(upl_perfil)
+    st.info('''Caso queira adicionar novos items ao seu perfil, você poderá seleciona-los normalmente depois de ter feito o upload, e assim que fizer
 o download já terá seu perfil atualizado !''')
+
 
  
 perfil = {'name':[],'evaluation':[]}
@@ -85,6 +83,8 @@ for wine in bad:
     perfil['evaluation'].append(-1)
 
 perfil_df = pd.DataFrame(perfil)
+
+st.dataframe(perfil_df)
 
 if option ==  True:
 
