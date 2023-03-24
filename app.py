@@ -35,7 +35,9 @@ with col2:
 
 # Matriz com carcaterísticas do vinho.
 
-vinhos = fu.import_encrypted_csv('model/super_wine_set_clean.csv', st.secrets["key"])
+
+
+vinhos = fu.import_encrypted_csv('model/encr_super_wine_set_clean.csv', st.secrets["key"])
 
 vinhos.set_index('vinho', inplace=True)
 
