@@ -1,5 +1,6 @@
 from io import BytesIO
 import pandas as pd
+from cryptography.fernet import Fernet
 
 def df_to_excel_bytes(df, sheet_name='Sheet1'):
     """
@@ -18,3 +19,17 @@ def df_to_excel_bytes(df, sheet_name='Sheet1'):
     excel_bytes = excel_file.read()
 
     return excel_bytes
+
+def import_encrypted_csv(file_path, key):
+    # Create a Fernet instance with the key
+    fernet = Fernet(key)
+
+    # Load the encrypted data from file
+    with open(file_path, 'rb') as file:
+        encrypted_data = file.read()
+
+    # Decrypt the data and convert it back to a DataFrame
+    decrypted_data = fernet.decrypt(encrypted_data).decode()
+    df = pd.read_csv(io.StringIO(decrypted_data))
+
+    return df

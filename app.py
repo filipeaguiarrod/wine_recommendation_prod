@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from toolbox import front_utils as fu, recommender as rc
+import os
 
 st.set_page_config(
     page_title="Alfred Wine Advisor",
@@ -34,13 +35,13 @@ with col2:
 
 # Matriz com carcaterísticas do vinho.
 
-vinhos = pd.read_csv('model/super_wine_set_clean.csv')
+vinhos = fu.import_encrypted_csv('model/super_wine_set_clean.csv', os.environ["key"])
 
 vinhos.set_index('vinho', inplace=True)
 
 # Matriz com vectorização dos atributos
 
-model = pd.read_csv('model/vectorized_wine_matrix.csv')
+model = pd.read_csv('model/vectorized_wine_matrix.csv') 
 
 model.set_index('vinho', inplace=True)
 
