@@ -37,7 +37,9 @@ with col2:
 
 
 
-vinhos = fu.import_encrypted_csv('model/encr_super_wine_set_clean.csv', st.secrets["key"])
+#vinhos = fu.import_encrypted_csv('model/encr_super_wine_set_clean.csv', st.secrets["key"])
+
+vinhos = pd.read_csv('model/super_wine_set_clean.csv')
 
 vinhos.set_index('vinho', inplace=True)
 
