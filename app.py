@@ -115,7 +115,7 @@ st.download_button(label="Faça Download do seu Perfil",data=fu.df_to_excel_byte
     
 st.title('Recomendação')
 
-st.info('Esta não é uma recomendação com objetivo comerical, tem um caráter experimental/educacional ! Experimente por sua conta e risco.')
+st.info('Esta não é uma recomendação com objetivo comercial, tem um caráter experimental/educacional ! Experimente por sua conta e risco.')
 
 try:
     top = st.slider('Quantos Vinhos você quer que sejam recomendados ?', min_value=1, max_value=12,value=4,step=1)
