@@ -1,0 +1,6 @@
+super_adega se mostrou um dataframe pobre, poucos preços, sem olfativo, gustativo e visual fugindo dos outros datasets.
+
+próximo e por hora último scraping de pão de açucar; https://www.paodeacucar.com/adega/produto/50231/vinho-portugues-tinto-periquita-garrafa-750ml
+
+
+-> 01 parece nao necessariamente fazer muito sentido

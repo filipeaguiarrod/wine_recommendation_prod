@@ -1,6 +1,6 @@
 *.json/
 .ipynb_checkpoints/
 data_collecting/
-etl/
 perfil/
 encript.ipynb
+elt/*.csv
