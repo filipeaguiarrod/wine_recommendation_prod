@@ -1,6 +1,12 @@
+# Data files
 *.json/
-.ipynb_checkpoints/
+
+#Folders
 data_collecting/
-perfil/
-encript.ipynb
+data/
 elt/*.csv
+src/data
+
+.ipynb_checkpoints/
+encript.ipynb
+

@@ -14,7 +14,7 @@ st.set_page_config(
 st.title('Alfred wine advisor :wine_glass:')
 
 # Load the image
-image = Image.open('arts/alfred_art.png')
+image = Image.open('reports/figures/alfred_art.png')
 #image = image.resize((420,420))
 
 col1, col2, = st.columns(2)
