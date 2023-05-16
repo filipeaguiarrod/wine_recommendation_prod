@@ -2,7 +2,7 @@
 numpy==1.24.0
 pandas==1.5.2
 scikit-learn==1.2.0
-streamlit==1.18.1
+streamlit
 xlrd==2.0.1
 XlsxWriter==3.0.8
 openpyxl
